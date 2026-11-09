@@ -1,6 +1,6 @@
-# MiniApp API
+# MiniApps API
 
-Подключите в HTML:
+Подключайте на каждой странице:
 
 ```html
 <script src="./miniapps-bridge.js"></script>
@@ -9,28 +9,57 @@
 ## Вызов
 
 ```js
-await MiniApps.fs('read', { path: 'data.json' });
+await MiniApps.fs('read', { path: 'notes.txt' });
 await MiniApps.shell('setChrome', { topBar: false });
-await MiniApps.share('start', { appId: 'chat' });
+await MiniApps.call('rooms', 'list', {});
 ```
 
-### fs
-`read` | `write` | `list` | `remove` — файлы пакета / data-области приложения.
+`MiniApps.<category>(action, params)` → то же, что `MiniApps.call(category, action, params)`.
 
-### shell
-`setAppearance` | `setCssTokens` | `setKeepAwake` | `openSystemMenu` | `setChrome`
+## Как это устроено
 
-### share
-LAN: `start` | `stop` | `status` — HTTP + единый WS на порту хоста.
+Модули приложения лежат в пакете:
 
-### net
-`fetch` — прокси запросов с хоста (обход CORS PWA).
+```
+api/
+  fs/
+    read.js
+    write.js
+  rooms/
+    list.js
+```
 
-## WebSocket
+Каждый файл экспортирует обработчик:
 
 ```js
-const ws = await MiniApps.ws.open({ path: '/room' });
-ws.send(JSON.stringify({ type: 'ping' }));
+// api/rooms/list.js
+export default async function list(ctx) {
+  // ctx: { appId, params, method, request }
+  return { ok: true, rooms: [] };
+}
 ```
 
-На хосте шелл делает fan-out всем клиентам комнаты. Отдельный `+ws.js` не нужен.
+### На хосте (WebView)
+
+Bridge делает dynamic import `api/<category>/<action>.js` в рантайме оболочки и возвращает результат в страницу.
+
+### Из сети (другой телефон / PWA / ПК)
+
+Тот же путь обрабатывает **LAN HTTP-сервер** оболочки:
+
+`POST http://<host-ip>:<port>/api/<category>/<action>`
+
+Тело — JSON params. Ответ — JSON результата модуля.
+
+WebSocket: один канал на сессию share (`MiniApps.ws.open({ path: '/...' })`).
+
+## Встроенные категории оболочки
+
+| Category | Примеры actions |
+|----------|-----------------|
+| `fs` | `read`, `write`, `list`, `remove` |
+| `shell` | `setChrome`, `setAppearance`, `setKeepAwake` |
+| `share` | `start`, `stop`, `status` |
+| `net` | `fetch` |
+
+Приложение может добавлять свои категории в `api/`.

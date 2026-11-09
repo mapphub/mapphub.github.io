@@ -1,6 +1,6 @@
 # Манифест
 
-Файл `mappmanifest.json` в корне репозитория (копируется в dist при сборке).
+Файл `mappmanifest.json` в корне (копируется в dist).
 
 ```json
 {
@@ -19,7 +19,7 @@
 }
 ```
 
-- `routes.root` — корень UI (для Pages = `/`).
-- `routes.app` — точка входа хоста внутри root.
-- `web: true` — CI публикует GitHub Pages.
-- `author` — GitHub login; сверяется при PR в gateway / app-репо.
+- `routes.root` — корень UI
+- `routes.app` — точка входа
+- `web: true` — CI публикует GitHub Pages
+- `author` — GitHub login владельца

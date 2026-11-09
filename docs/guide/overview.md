@@ -2,7 +2,9 @@
 
 Mapphub — offline-first платформа мини-приложений.
 
-- **Оболочка** (Android): без UI, кроме системных диалогов. Запускает пакеты, FS, LAN, разрешения.
-- **Пакет** (`app.zip`): статика + `mappmanifest.json`. Один и тот же dist для телефона, десктопа и web.
-- **Без `+server.js`**: серверной логики в пакете нет. Данные и сеть — через `MiniApps.*` и единый WebSocket шелла.
-- **Каталог**: `https://mapphub.github.io/market/catalog.json`
+- **Оболочка** (Android): системные диалоги, пакеты, FS, LAN, разрешения.
+- **Пакет** (`app.zip`): статика + `mappmanifest.json` + модули `api/`.
+- Один dist для телефона, десктопа и web.
+- **Bridge** проксирует вызовы в модули `api/<category>/<action>.js` (на хосте и по сети).
+- **Каталог**: https://mapphub.github.io/market/catalog.json
+- **Шаблон**: https://github.com/mapphub/mapp-template
