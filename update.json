@@ -1,10 +1,12 @@
 {
-  "versionCode": 1,
-  "versionName": "0.1.0",
-  "apkUrl": "https://github.com/mapphub/mapphub.github.io/releases/latest/download/mini-apps-shell.apk",
+  "versionCode": 9,
+  "versionName": "0.1.9",
+  "channel": "beta",
+  "apkUrl": "https://github.com/mapphub/mobile-shell/releases/latest/download/mini-apps-shell-debug.apk",
+  "releaseNotesUrl": "https://github.com/mapphub/mobile-shell/releases/latest",
   "changelog": [
-    "Первый публичный каталог mapphub",
-    "Оболочка без +server.js — только MiniApp API",
-    "Единый WebSocket-канал через шелл"
+    "Исправление seedDefaults (boot: e is not a function)",
+    "Home по умолчанию: market",
+    "Каталог: https://mapphub.github.io/catalog.json"
   ]
 }
