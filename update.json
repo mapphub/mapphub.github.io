@@ -1,11 +1,10 @@
 {
-  "versionCode": 11,
-  "versionName": "0.1.11",
+  "versionCode": 17,
+  "versionName": "0.1.17",
   "channel": "beta",
   "apkUrl": "https://mapphub.github.io/downloads/mini-apps-shell.apk",
-  "releaseNotesUrl": "https://github.com/mapphub/mobile-shell/releases/latest",
+  "releaseNotesUrl": "https://github.com/mapphub/mobile-shell/releases/tag/beta-17",
   "changelog": [
-    "Исправление seedDefaults",
-    "Публикация APK на GitHub Pages"
+    "Beta build 17"
   ]
 }
