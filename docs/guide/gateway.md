@@ -1,9 +1,10 @@
-# Gateway
+# Шаблон для разработчиков
 
-Репозиторий-шаблон: https://github.com/mapphub/gateway
+Стартовая точка: **[mapp-template](https://github.com/mapphub/mapp-template)**
 
-PR в gateway:
+1. **Use this template** на GitHub → репозиторий `app-<id>`
+2. Заполните `mappmanifest.json` (`id`, `name`, `version`, `author`)
+3. Push → CI собирает `app.zip` и (при `web: true`) Pages
+4. Запись попадает в [каталог](https://mapphub.github.io/market/catalog.json)
 
-1. CI читает манифест.
-2. Если репо `app-<id>` нет — создаёт и пушит код.
-3. Если есть — сверяет `author` с автором PR; при совпадении обновляет при `version` ↑; иначе комментарий с подсказкой переименовать `id`.
+Старое имя `gateway` больше не используется.
