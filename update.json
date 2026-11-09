@@ -1,0 +1,10 @@
+{
+  "versionCode": 1,
+  "versionName": "0.1.0",
+  "apkUrl": "https://github.com/mapphub/mapphub.github.io/releases/latest/download/mini-apps-shell.apk",
+  "changelog": [
+    "Первый публичный каталог mapphub",
+    "Оболочка без +server.js — только MiniApp API",
+    "Единый WebSocket-канал через шелл"
+  ]
+}
