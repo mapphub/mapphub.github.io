@@ -1,12 +1,11 @@
 {
-  "versionCode": 9,
-  "versionName": "0.1.9",
+  "versionCode": 11,
+  "versionName": "0.1.11",
   "channel": "beta",
-  "apkUrl": "https://github.com/mapphub/mobile-shell/releases/latest/download/mini-apps-shell-debug.apk",
+  "apkUrl": "https://mapphub.github.io/downloads/mini-apps-shell.apk",
   "releaseNotesUrl": "https://github.com/mapphub/mobile-shell/releases/latest",
   "changelog": [
-    "Исправление seedDefaults (boot: e is not a function)",
-    "Home по умолчанию: market",
-    "Каталог: https://mapphub.github.io/catalog.json"
+    "Исправление seedDefaults",
+    "Публикация APK на GitHub Pages"
   ]
 }
