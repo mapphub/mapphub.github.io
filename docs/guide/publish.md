@@ -1,6 +1,8 @@
 # Публикация
 
-1. Создайте приложение из [mapp-template](https://github.com/mapphub/mapp-template) (Use this template).
-2. Заполните `mappmanifest.json` (`id`, `version`, `author`).
-3. Push в `main` → Action собирает `app.zip`, Release, при `web: true` — Pages.
-4. Добавьте/обновите запись в `market/catalog.json` (официальные apps — через PR в mapphub.github.io).
+1. Создайте приложение из [mapp-template](https://github.com/mapphub/mapp-template).
+2. Заполните `mappmanifest.json`.
+3. Push → CI собирает `app.zip` и Release.
+4. Добавьте запись в корневой [catalog.json](https://mapphub.github.io/catalog.json) (PR в mapphub.github.io).
+
+«Маркет» (`app-market`) — обычное мини-приложение; home по умолчанию, не путать с каталогом платформы.
