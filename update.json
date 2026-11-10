@@ -1,10 +1,10 @@
 {
-  "versionCode": 31,
-  "versionName": "0.1.31",
+  "versionCode": 32,
+  "versionName": "0.1.32",
   "channel": "beta",
   "apkUrl": "https://mapphub.github.io/downloads/mini-apps-shell.apk",
-  "releaseNotesUrl": "https://github.com/mapphub/mobile-shell/releases/tag/beta-31",
+  "releaseNotesUrl": "https://github.com/mapphub/mobile-shell/releases/tag/beta-32",
   "changelog": [
-    "Beta build 31"
+    "Beta build 32"
   ]
 }
