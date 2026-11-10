@@ -10,14 +10,14 @@
   <nav class="nav">
     <a href="./">Обзор</a>
     <a href="./manifest.html">Манифест</a>
-    <a href="./api.html">MiniApps API</a>
+    <a href="./api.html">MiniApp API</a>
     <a href="./publish.html">Публикация</a>
   </nav>
 
-  <h1>mappmanifest.json</h1>
-  <p>Файл в корне пакета мини-приложения. Оболочка читает его при установке, открытии и проверке обновлений.</p>
+  <h1>mapp.manifest.json</h1>
+  <p>Каноническое имя. Оболочка также принимает <code>mappmanifest.json</code>.</p>
 
-  <h2>Полный пример</h2>
+  <h2>Пример</h2>
   <pre>{
   "id": "chat",
   "name": "Чат",
@@ -25,69 +25,39 @@
   "description": "LAN-чат",
   "author": "mapphub",
   "icon": "icon.svg",
-  "routes": {
-    "root": ".",
-    "app": ".",
-    "client": "."
-  },
-  "server": {
-    "host": true,
-    "client": true,
-    "network": true,
-    "samePort": true,
-    "forceHttp": false
-  },
+  "routes": { "root": "public", "app": "public", "client": "public" },
+  "server": { "host": true, "client": true, "network": true },
   "permissions": ["net", "share", "db", "notify"],
   "tags": ["social"],
-  "system": false,
-  "launcher": false,
-  "webUrl": "https://mapphub.github.io/apps/chat/"
+  "launcher": false
 }</pre>
 
   <h2>Поля</h2>
   <table>
     <thead><tr><th>Поле</th><th>Тип</th><th>По умолчанию</th><th>Описание</th></tr></thead>
     <tbody>
-      <tr><td><code>id</code></td><td>string</td><td>—</td><td>Уникальный идентификатор пакета. Латиница, цифры, <code>._-</code>. На устройстве каталог = <code>mapp/apps/{id}/</code>.</td></tr>
-      <tr><td><code>name</code></td><td>string</td><td>= id</td><td>Отображаемое имя на рабочем столе и в каталоге.</td></tr>
-      <tr><td><code>version</code></td><td>number | string</td><td><code>1</code></td><td>Версия пакета. Число или semver (<code>1.2.0</code>). Используется в <code>apps.checkUpdate</code>.</td></tr>
-      <tr><td><code>description</code></td><td>string</td><td><code>""</code></td><td>Краткое описание.</td></tr>
-      <tr><td><code>author</code></td><td>string</td><td>—</td><td>Автор (логин GitHub). В каталоге сторонних: часть id <code>author.name</code>.</td></tr>
-      <tr><td><code>icon</code></td><td>string</td><td>—</td><td>Путь к иконке относительно корня пакета (<code>icon.svg</code> / <code>icon.png</code>). SVG предпочтительно с <code>fill="currentColor"</code>.</td></tr>
-      <tr><td><code>routes.root</code></td><td>string</td><td><code>"."</code></td><td>Корень содержимого пакета (статика).</td></tr>
-      <tr><td><code>routes.app</code></td><td>string</td><td>= root</td><td>Точка входа <b>host</b>-UI (папка относительно пакета).</td></tr>
-      <tr><td><code>routes.client</code></td><td>string</td><td>= app</td><td>Точка входа <b>client</b>-UI (LAN / веб-превью).</td></tr>
-      <tr><td><code>server.host</code></td><td>bool</td><td><code>true</code></td><td>Может работать как host-приложение на оболочке.</td></tr>
-      <tr><td><code>server.client</code></td><td>bool</td><td><code>false</code></td><td>Есть client-режим (LAN-гости, веб).</td></tr>
-      <tr><td><code>server.network</code></td><td>bool</td><td><code>false</code></td><td>Разрешить публикацию по сети (share).</td></tr>
-      <tr><td><code>server.samePort</code></td><td>bool</td><td><code>true</code></td><td>HTTP и WS на одном порту, если возможно.</td></tr>
-      <tr><td><code>server.forceHttp</code></td><td>bool</td><td><code>false</code></td><td>Всегда поднимать локальный HTTP, даже без client.</td></tr>
-      <tr><td><code>server.port</code></td><td>number?</td><td>auto</td><td>Предпочтительный порт (если свободен).</td></tr>
-      <tr><td><code>permissions</code></td><td>string[]</td><td><code>[]</code></td><td>Запрашиваемые разрешения при первом открытии. См. таблицу ниже.</td></tr>
-      <tr><td><code>tags</code></td><td>string[]</td><td><code>[]</code></td><td>Метки для каталога.</td></tr>
-      <tr><td><code>system</code></td><td>bool</td><td><code>false</code></td><td>Системное (нельзя удалить из launcher без спец. прав).</td></tr>
-      <tr><td><code>launcher</code></td><td>bool</td><td><code>false</code></td><td>Может быть домашним приложением оболочки.</td></tr>
-      <tr><td><code>webUrl</code></td><td>string?</td><td>—</td><td>URL веб-версии (GitHub Pages) для встроенного браузера каталога.</td></tr>
+      <tr><td><code>id</code></td><td>string</td><td>—</td><td>ID пакета</td></tr>
+      <tr><td><code>name</code></td><td>string</td><td>= id</td><td>Отображаемое имя</td></tr>
+      <tr><td><code>version</code></td><td>number|string</td><td>1</td><td>Для checkUpdate</td></tr>
+      <tr><td><code>description</code></td><td>string</td><td>""</td><td>Описание</td></tr>
+      <tr><td><code>author</code></td><td>string</td><td>—</td><td>Автор (GitHub login)</td></tr>
+      <tr><td><code>icon</code></td><td>string</td><td>—</td><td>Путь к иконке</td></tr>
+      <tr><td><code>routes.root/app/client</code></td><td>string</td><td>"."</td><td>Корень / host UI / client UI</td></tr>
+      <tr><td><code>server.host</code></td><td>bool</td><td>true</td><td>Host-режим</td></tr>
+      <tr><td><code>server.client</code></td><td>bool</td><td>false</td><td>Client-режим</td></tr>
+      <tr><td><code>server.network</code></td><td>bool</td><td>false</td><td>LAN share</td></tr>
+      <tr><td><code>permissions</code></td><td>string[]</td><td>[]</td><td>Запрос при первом открытии</td></tr>
+      <tr><td><code>tags</code></td><td>string[]</td><td>[]</td><td>Метки каталога</td></tr>
+      <tr><td><code>launcher</code></td><td>bool</td><td>false</td><td>Может быть домашним</td></tr>
+      <tr><td><code>webUrl</code></td><td>string?</td><td>—</td><td>GitHub Pages URL</td></tr>
     </tbody>
   </table>
 
-  <h2>permissions</h2>
-  <table>
-    <thead><tr><th>Код</th><th>Смысл</th></tr></thead>
-    <tbody>
-      <tr><td><code>*</code></td><td>Полный доступ ко всем API</td></tr>
-      <tr><td><code>share</code></td><td>Локальный HTTP/WS для доступа по LAN</td></tr>
-      <tr><td><code>net</code></td><td>Обмен сообщениями в реальном времени</td></tr>
-      <tr><td><code>notify</code></td><td>Тосты и бейджи</td></tr>
-      <tr><td><code>db</code> / <code>db.local</code></td><td>Локальное key-value / SQLite хранилище</td></tr>
-      <tr><td><code>apps</code> / <code>apps.manage</code></td><td>Установка и удаление пакетов</td></tr>
-      <tr><td><code>apps.read</code></td><td>Чтение файлов других приложений</td></tr>
-      <tr><td><code>apps.write</code></td><td>Запись в пакеты других приложений</td></tr>
-      <tr><td><code>device</code>, <code>device.camera</code>, <code>device.geo</code></td><td>Возможности устройства</td></tr>
-      <tr><td><code>shell</code></td><td>Управление chrome оболочки</td></tr>
-    </tbody>
-  </table>
-
-  <p class="muted">Имена файлов: в текущей оболочке канонический файл — <code>mappmanifest.json</code> (также допускается <code>mapp.manifest.json</code> в шаблоне после нормализации CI).</p>
+  <h2>Структура пакета (ZIP)</h2>
+  <pre>mapp.manifest.json
+icon.svg
+public/
+  index.html
+  script.js</pre>
 </body>
 </html>

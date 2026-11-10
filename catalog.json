@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T08:00:00Z",
+  "updatedAt": "2026-11-10T22:00:00Z",
   "platform": {
     "name": "Mapphub",
     "docs": "https://mapphub.github.io/docs/",
@@ -8,12 +8,12 @@
   "apps": [
     {
       "id": "market",
-      "name": "Маркет",
-      "version": "0.2.0",
-      "description": "Каталог мини-приложений (SvelteKit)",
+      "name": "Лаунчер",
+      "version": "0.3.0",
+      "description": "Рабочий стол и каталог мини-приложений",
       "author": "mapphub",
       "repo": "https://github.com/mapphub/app-market",
-      "packageUrl": "https://mapphub.github.io/packages/market.zip",
+      "packageUrl": "https://github.com/mapphub/app-market/releases/latest/download/app.zip",
       "releaseUrl": "https://github.com/mapphub/app-market/releases/latest/download/app.zip",
       "permissions": [],
       "official": true
@@ -21,23 +21,21 @@
     {
       "id": "editor",
       "name": "Редактор",
-      "version": "0.2.0",
-      "description": "Создание и правка мини-приложений",
+      "version": "0.3.0",
       "author": "mapphub",
       "repo": "https://github.com/mapphub/app-editor",
-      "packageUrl": "https://mapphub.github.io/packages/editor.zip",
+      "packageUrl": "https://github.com/mapphub/app-editor/releases/latest/download/app.zip",
       "releaseUrl": "https://github.com/mapphub/app-editor/releases/latest/download/app.zip",
-      "permissions": ["apps.read", "apps.write", "share", "net"],
+      "permissions": ["apps.read", "apps.write", "apps.manage"],
       "official": true
     },
     {
       "id": "chat",
       "name": "Чат",
-      "version": "0.2.0",
-      "description": "LAN-чат через MiniApps.net",
+      "version": "0.3.0",
       "author": "mapphub",
       "repo": "https://github.com/mapphub/app-chat",
-      "packageUrl": "https://mapphub.github.io/packages/chat.zip",
+      "packageUrl": "https://github.com/mapphub/app-chat/releases/latest/download/app.zip",
       "releaseUrl": "https://github.com/mapphub/app-chat/releases/latest/download/app.zip",
       "permissions": ["net", "share", "db", "notify"],
       "official": true
@@ -45,11 +43,10 @@
     {
       "id": "fileshare",
       "name": "Обмен файлами",
-      "version": "0.2.0",
-      "description": "Файлы через MiniApps.db + net (без +server.js)",
+      "version": "0.3.0",
       "author": "mapphub",
       "repo": "https://github.com/mapphub/app-fileshare",
-      "packageUrl": "https://mapphub.github.io/packages/fileshare.zip",
+      "packageUrl": "https://github.com/mapphub/app-fileshare/releases/latest/download/app.zip",
       "releaseUrl": "https://github.com/mapphub/app-fileshare/releases/latest/download/app.zip",
       "permissions": ["net", "share", "db"],
       "official": true
@@ -57,11 +54,10 @@
     {
       "id": "slides",
       "name": "Презентация",
-      "version": "0.2.0",
-      "description": "Слайды ведущий/зритель",
+      "version": "0.3.0",
       "author": "mapphub",
       "repo": "https://github.com/mapphub/app-slides",
-      "packageUrl": "https://mapphub.github.io/packages/slides.zip",
+      "packageUrl": "https://github.com/mapphub/app-slides/releases/latest/download/app.zip",
       "releaseUrl": "https://github.com/mapphub/app-slides/releases/latest/download/app.zip",
       "permissions": ["net", "share"],
       "official": true
