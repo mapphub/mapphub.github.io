@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T22:40:00Z",
+  "updatedAt": "2026-11-10T22:10:00Z",
   "platform": {
     "name": "Mapphub",
     "docs": "https://mapphub.github.io/docs/",
@@ -13,7 +13,7 @@
       "description": "Рабочий стол установленных мини-приложений и каталог",
       "author": "mapphub",
       "repo": "https://github.com/mapphub/app-market",
-      "packageUrl": "https://github.com/mapphub/app-market/releases/latest/download/app.zip",
+      "packageUrl": "https://mapphub.github.io/packages/market.zip",
       "releaseUrl": "https://github.com/mapphub/app-market/releases/latest/download/app.zip",
       "permissions": ["apps", "apps.read", "apps.manage", "hub", "shell"],
       "official": true
@@ -24,7 +24,7 @@
       "version": "0.3.0",
       "author": "mapphub",
       "repo": "https://github.com/mapphub/app-editor",
-      "packageUrl": "https://github.com/mapphub/app-editor/releases/latest/download/app.zip",
+      "packageUrl": "https://mapphub.github.io/packages/editor.zip",
       "releaseUrl": "https://github.com/mapphub/app-editor/releases/latest/download/app.zip",
       "permissions": ["apps.read", "apps.write", "apps.manage"],
       "official": true
@@ -35,7 +35,7 @@
       "version": "0.3.0",
       "author": "mapphub",
       "repo": "https://github.com/mapphub/app-chat",
-      "packageUrl": "https://github.com/mapphub/app-chat/releases/latest/download/app.zip",
+      "packageUrl": "https://mapphub.github.io/packages/chat.zip",
       "releaseUrl": "https://github.com/mapphub/app-chat/releases/latest/download/app.zip",
       "permissions": ["net", "share", "db", "notify"],
       "official": true
@@ -46,7 +46,7 @@
       "version": "0.3.0",
       "author": "mapphub",
       "repo": "https://github.com/mapphub/app-fileshare",
-      "packageUrl": "https://github.com/mapphub/app-fileshare/releases/latest/download/app.zip",
+      "packageUrl": "https://mapphub.github.io/packages/fileshare.zip",
       "releaseUrl": "https://github.com/mapphub/app-fileshare/releases/latest/download/app.zip",
       "permissions": ["net", "share", "db"],
       "official": true
@@ -57,7 +57,7 @@
       "version": "0.3.0",
       "author": "mapphub",
       "repo": "https://github.com/mapphub/app-slides",
-      "packageUrl": "https://github.com/mapphub/app-slides/releases/latest/download/app.zip",
+      "packageUrl": "https://mapphub.github.io/packages/slides.zip",
       "releaseUrl": "https://github.com/mapphub/app-slides/releases/latest/download/app.zip",
       "permissions": ["net", "share"],
       "official": true

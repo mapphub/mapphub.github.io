@@ -1,0 +1,42 @@
+name: Mirror mini-app packages to Pages
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'
+  repository_dispatch:
+    types: [mirror-packages]
+permissions:
+  contents: write
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download release zips
+        run: |
+          set -euo pipefail
+          mkdir -p packages
+          download() {
+            local id="$1" repo="$2"
+            local url="https://github.com/mapphub/${repo}/releases/latest/download/app.zip"
+            echo "Fetching $id from $url"
+            if curl -fsSL -o "packages/${id}.zip" -L "$url"; then
+              ls -lh "packages/${id}.zip"
+            else
+              echo "WARN missing $id"
+            fi
+          }
+          download market app-market
+          download editor app-editor
+          download chat app-chat
+          download fileshare app-fileshare
+          download slides app-slides
+          ls -la packages || true
+      - name: Commit
+        run: |
+          git config user.name mapphub-ci
+          git config user.email ci@mapphub.local
+          git add packages/*.zip catalog.json || true
+          git diff --cached --quiet && echo no-change && exit 0
+          git commit -m "chore: mirror mini-app packages"
+          git push
