@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T00:00:00Z",
+  "updatedAt": "2026-11-10T08:00:00Z",
   "platform": {
     "name": "Mapphub",
     "docs": "https://mapphub.github.io/docs/",
@@ -13,7 +13,8 @@
       "description": "Каталог мини-приложений (SvelteKit)",
       "author": "mapphub",
       "repo": "https://github.com/mapphub/app-market",
-      "packageUrl": "https://github.com/mapphub/app-market/releases/latest/download/app.zip",
+      "packageUrl": "https://mapphub.github.io/packages/market.zip",
+      "releaseUrl": "https://github.com/mapphub/app-market/releases/latest/download/app.zip",
       "permissions": [],
       "official": true
     },
@@ -24,7 +25,8 @@
       "description": "Создание и правка мини-приложений",
       "author": "mapphub",
       "repo": "https://github.com/mapphub/app-editor",
-      "packageUrl": "https://github.com/mapphub/app-editor/releases/latest/download/app.zip",
+      "packageUrl": "https://mapphub.github.io/packages/editor.zip",
+      "releaseUrl": "https://github.com/mapphub/app-editor/releases/latest/download/app.zip",
       "permissions": ["apps.read", "apps.write", "share", "net"],
       "official": true
     },
@@ -32,10 +34,11 @@
       "id": "chat",
       "name": "Чат",
       "version": "0.2.0",
-      "description": "Комнаты и сообщения по LAN",
+      "description": "LAN-чат через MiniApps.net",
       "author": "mapphub",
       "repo": "https://github.com/mapphub/app-chat",
-      "packageUrl": "https://github.com/mapphub/app-chat/releases/latest/download/app.zip",
+      "packageUrl": "https://mapphub.github.io/packages/chat.zip",
+      "releaseUrl": "https://github.com/mapphub/app-chat/releases/latest/download/app.zip",
       "permissions": ["net", "share", "db", "notify"],
       "official": true
     },
@@ -43,10 +46,11 @@
       "id": "fileshare",
       "name": "Обмен файлами",
       "version": "0.2.0",
-      "description": "Передача файлов по LAN (MiniApps.net, без +server.js)",
+      "description": "Файлы через MiniApps.db + net (без +server.js)",
       "author": "mapphub",
       "repo": "https://github.com/mapphub/app-fileshare",
-      "packageUrl": "https://github.com/mapphub/app-fileshare/releases/latest/download/app.zip",
+      "packageUrl": "https://mapphub.github.io/packages/fileshare.zip",
+      "releaseUrl": "https://github.com/mapphub/app-fileshare/releases/latest/download/app.zip",
       "permissions": ["net", "share", "db"],
       "official": true
     },
@@ -57,7 +61,8 @@
       "description": "Слайды ведущий/зритель",
       "author": "mapphub",
       "repo": "https://github.com/mapphub/app-slides",
-      "packageUrl": "https://github.com/mapphub/app-slides/releases/latest/download/app.zip",
+      "packageUrl": "https://mapphub.github.io/packages/slides.zip",
+      "releaseUrl": "https://github.com/mapphub/app-slides/releases/latest/download/app.zip",
       "permissions": ["net", "share"],
       "official": true
     }

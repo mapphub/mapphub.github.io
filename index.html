@@ -3,30 +3,21 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Mapphub — платформа мини-приложений</title>
+  <title>Mapphub</title>
   <style>
-    :root { color-scheme: dark light; font-family: system-ui, sans-serif; }
-    body { max-width: 720px; margin: 40px auto; padding: 0 16px; line-height: 1.5; }
-    a { color: #58a6ff; }
-    code { background: #21262d; padding: 2px 6px; border-radius: 4px; }
-    .btn {
-      display: inline-block; margin-top: 12px; padding: 10px 16px;
-      background: #238636; color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600;
-    }
+    body{font-family:system-ui;margin:0;background:#0d1117;color:#e6edf3;padding:32px 20px;max-width:720px;margin-inline:auto}
+    a{color:#58a6ff} .card{border:1px solid #30363d;border-radius:12px;padding:16px;margin:16px 0;background:#161b22}
+    h1{margin-top:0}
   </style>
 </head>
 <body>
   <h1>Mapphub</h1>
-  <p>Offline-first мини-приложения: один пакет для Android, desktop и web.</p>
-  <p>
-    <a class="btn" href="downloads/mini-apps-shell.apk">Скачать APK (Android)</a>
-  </p>
-  <ul>
-    <li><a href="docs/">Документация</a></li>
-    <li><a href="catalog.json"><code>catalog.json</code></a></li>
-    <li><a href="update.json"><code>update.json</code></a></li>
-    <li><a href="CHANGELOG.md">Changelog</a></li>
-    <li><a href="https://github.com/mapphub/mapp-template"><strong>mapp-template</strong></a></li>
-  </ul>
+  <p>Платформа мини-приложений для Android.</p>
+  <div class="card">
+    <a href="downloads/mini-apps-shell.apk"><strong>Скачать APK</strong></a><br/>
+    <a href="docs/">Документация</a> ·
+    <a href="catalog.json">catalog.json</a> ·
+    <a href="https://github.com/mapphub">GitHub</a>
+  </div>
 </body>
 </html>

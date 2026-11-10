@@ -1,0 +1,36 @@
+name: Decode package zips
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'packages/*.b64'
+      - 'packages/*.part*.b64'
+permissions:
+  contents: write
+jobs:
+  decode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Decode
+        run: |
+          set -euo pipefail
+          mkdir -p packages
+          # reassemble split market
+          if [ -f packages/market.zip.part1.b64 ] && [ -f packages/market.zip.part2.b64 ]; then
+            cat packages/market.zip.part1.b64 packages/market.zip.part2.b64 > packages/market.zip.b64
+          fi
+          for f in packages/*.zip.b64; do
+            [ -f "$f" ] || continue
+            out="${f%.b64}"
+            base64 -d "$f" > "$out"
+            ls -lh "$out"
+          done
+      - name: Commit zips
+        run: |
+          git config user.name mapphub-ci
+          git config user.email ci@mapphub.local
+          git add packages/*.zip || true
+          git diff --cached --quiet && echo no-change && exit 0
+          git commit -m "chore: decode mini-app package zips"
+          git push
