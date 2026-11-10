@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T22:00:00Z",
+  "updatedAt": "2026-11-10T22:40:00Z",
   "platform": {
     "name": "Mapphub",
     "docs": "https://mapphub.github.io/docs/",
@@ -9,13 +9,13 @@
     {
       "id": "market",
       "name": "Лаунчер",
-      "version": "0.3.0",
-      "description": "Рабочий стол и каталог мини-приложений",
+      "version": "0.4.0",
+      "description": "Рабочий стол установленных мини-приложений и каталог",
       "author": "mapphub",
       "repo": "https://github.com/mapphub/app-market",
       "packageUrl": "https://github.com/mapphub/app-market/releases/latest/download/app.zip",
       "releaseUrl": "https://github.com/mapphub/app-market/releases/latest/download/app.zip",
-      "permissions": [],
+      "permissions": ["apps", "apps.read", "apps.manage", "hub", "shell"],
       "official": true
     },
     {
