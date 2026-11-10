@@ -1,9 +1,6 @@
 # Документация Mapphub
 
-- [Обзор](./guide/overview.md)
-- [Манифест](./guide/manifest.md)
-- [MiniApps API](./api/miniapps.md)
-- [Публикация](./guide/publish.md)
-- [Шаблон mapp-template](./guide/gateway.md)
-
-На сайте: https://mapphub.github.io/docs/
+- [Обзор](./index.html)
+- [Манифест](./manifest.html)
+- [MiniApps API](./api.html)
+- [Публикация](./publish.html)

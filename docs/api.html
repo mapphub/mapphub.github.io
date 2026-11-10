@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>MiniApps API — Mapphub</title>
+  <link rel="stylesheet" href="./docs.css"/>
+</head>
+<body>
+  <nav class="nav">
+    <a href="./">Обзор</a>
+    <a href="./manifest.html">Манифест</a>
+    <a href="./api.html">MiniApps API</a>
+    <a href="./publish.html">Публикация</a>
+  </nav>
+
+  <h1>MiniApps API</h1>
+  <p>Вызов из мини-приложения:</p>
+  <pre>// category(action, params)
+await MiniApps.apps.list()
+await MiniApps.apps.checkUpdate({ appId: 'chat' })
+await MiniApps.net.send({ text: 'hi' }, 'message')
+
+// или универсально через bridge
+await MiniApps.call?.('apps', 'list', {})</pre>
+  <p>Легенда: <span class="ok">●</span> работает · <span class="lim">◐</span> ограничено · <span class="no">○</span> нет</p>
+
+  <h2>apps — пакеты</h2>
+  <table>
+    <thead><tr><th>Метод</th><th>Параметры</th><th>Host</th><th>Client</th><th>Web</th><th>Описание</th></tr></thead>
+    <tbody>
+      <tr><td><code>list</code></td><td>—</td><td class="ok">●</td><td class="lim">◐</td><td class="lim">◐</td><td>Список установленных манифестов. На web/client — через прокси хоста, если есть сессия.</td></tr>
+      <tr><td><code>importZip</code></td><td><code>{ id?, name?, files[] }</code></td><td class="ok">●</td><td class="no">○</td><td class="no">○</td><td>Установка пакета из списка файлов (path + content|base64).</td></tr>
+      <tr><td><code>checkUpdate</code></td><td><code>{ appId?, catalogUrl? }</code></td><td class="ok">●</td><td class="lim">◐</td><td class="ok">●</td><td>Сверка локальных версий с <code>catalog.json</code>. Возвращает <code>{ updates[] }</code>.</td></tr>
+      <tr><td><code>installUpdate</code></td><td><code>{ appId, packageUrl?, catalogUrl? }</code></td><td class="ok">●</td><td class="no">○</td><td class="no">○</td><td>Скачать ZIP и переустановить пакет.</td></tr>
+      <tr><td><code>create</code></td><td><code>{ name }</code></td><td class="ok">●</td><td class="no">○</td><td class="no">○</td><td>Создать пустой пакет (редактор).</td></tr>
+      <tr><td><code>remove</code></td><td><code>{ appId }</code></td><td class="ok">●</td><td class="no">○</td><td class="no">○</td><td>Удалить пакет с устройства.</td></tr>
+      <tr><td><code>readFile</code> / <code>writeFile</code></td><td><code>{ appId, path, content? }</code></td><td class="ok">●</td><td class="no">○</td><td class="no">○</td><td>Чтение/запись файлов пакета.</td></tr>
+      <tr><td><code>listFiles</code></td><td><code>{ appId, path? }</code></td><td class="ok">●</td><td class="no">○</td><td class="no">○</td><td>Список файлов в пакете.</td></tr>
+      <tr><td><code>preview</code></td><td><code>{ appId }</code></td><td class="ok">●</td><td class="lim">◐</td><td class="lim">◐</td><td>Открыть пакет в iframe оболочки.</td></tr>
+      <tr><td><code>copy</code> / <code>rename</code></td><td>см. handlers</td><td class="ok">●</td><td class="no">○</td><td class="no">○</td><td>Копирование / переименование пакетов и файлов.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>checkUpdate — ответ</h3>
+  <pre>{
+  "ok": true,
+  "catalogUrl": "https://mapphub.github.io/catalog.json",
+  "checkedAt": "2026-11-10T…",
+  "updates": [
+    {
+      "appId": "chat",
+      "name": "Чат",
+      "localVersion": "1.0.0",
+      "remoteVersion": "1.1.0",
+      "packageUrl": "https://…/app.zip",
+      "changelog": []
+    }
+  ]
+}</pre>
+
+  <h2>hub — навигация оболочки</h2>
+  <table>
+    <thead><tr><th>Метод</th><th>Host</th><th>Client</th><th>Web</th><th>Описание</th></tr></thead>
+    <tbody>
+      <tr><td><code>getHome</code></td><td class="ok">●</td><td class="lim">◐</td><td class="no">○</td><td>Текущее домашнее приложение <code>{ appId }</code>.</td></tr>
+      <tr><td><code>setHome</code></td><td class="ok">●</td><td class="no">○</td><td class="no">○</td><td>Назначить домашнее (launcher) приложение.</td></tr>
+      <tr><td><code>open</code> / <code>openMarket</code></td><td class="ok">●</td><td class="no">○</td><td class="no">○</td><td>Открыть приложение / каталог.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>shell — chrome оболочки</h2>
+  <table>
+    <thead><tr><th>Метод</th><th>Host</th><th>Client</th><th>Web</th><th>Описание</th></tr></thead>
+    <tbody>
+      <tr><td><code>setChrome</code></td><td class="ok">●</td><td class="lim">◐</td><td class="no">○</td><td><code>{ title, topBar, bottomBar }</code></td></tr>
+      <tr><td><code>getChrome</code></td><td class="ok">●</td><td class="lim">◐</td><td class="no">○</td><td>Текущие настройки chrome.</td></tr>
+      <tr><td><code>setKeepAwake</code></td><td class="ok">●</td><td class="no">○</td><td class="no">○</td><td>Не гасить экран.</td></tr>
+      <tr><td><code>setAppearance</code> / <code>setCssTokens</code></td><td class="ok">●</td><td class="lim">◐</td><td class="lim">◐</td><td>Тема и CSS-переменные.</td></tr>
+      <tr><td><code>openApp</code> / <code>openSystemMenu</code></td><td class="ok">●</td><td class="no">○</td><td class="no">○</td><td>Навигация оболочки.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>share — LAN</h2>
+  <table>
+    <thead><tr><th>Метод</th><th>Host</th><th>Client</th><th>Web</th><th>Описание</th></tr></thead>
+    <tbody>
+      <tr><td><code>start</code></td><td class="ok">●</td><td class="no">○</td><td class="no">○</td><td>Поднятие HTTP/WS для appId.</td></tr>
+      <tr><td><code>stop</code> / <code>status</code> / <code>list</code> / <code>info</code></td><td class="ok">●</td><td class="lim">◐</td><td class="no">○</td><td>Управление и статус шаринга.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>net — realtime</h2>
+  <table>
+    <thead><tr><th>Метод</th><th>Host</th><th>Client</th><th>Web</th><th>Описание</th></tr></thead>
+    <tbody>
+      <tr><td><code>send</code></td><td class="ok">●</td><td class="ok">●</td><td class="lim">◐</td><td><code>send(payload, type)</code> — сообщение по каналу WS.</td></tr>
+      <tr><td><code>on</code></td><td class="ok">●</td><td class="ok">●</td><td class="lim">◐</td><td>Подписка на тип сообщений.</td></tr>
+      <tr><td><code>peers</code> / <code>ready</code> / <code>poll</code></td><td class="ok">●</td><td class="ok">●</td><td class="lim">◐</td><td>Список пиров и состояние канала.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>db — локальное хранилище</h2>
+  <table>
+    <thead><tr><th>Метод</th><th>Host</th><th>Client</th><th>Web</th><th>Описание</th></tr></thead>
+    <tbody>
+      <tr><td><code>local.open</code></td><td class="ok">●</td><td class="lim">◐</td><td class="lim">◐</td><td>Открыть named store.</td></tr>
+      <tr><td><code>local.get</code> / <code>set</code> / <code>delete</code></td><td class="ok">●</td><td class="lim">◐</td><td class="lim">◐</td><td>Key-value. На web — обычно localStorage-эмуляция.</td></tr>
+      <tr><td><code>query</code> / <code>exec</code> / <code>sql</code></td><td class="ok">●</td><td class="no">○</td><td class="no">○</td><td>SQLite пакета (если доступен плагин).</td></tr>
+    </tbody>
+  </table>
+
+  <h2>notify</h2>
+  <table>
+    <thead><tr><th>Метод</th><th>Host</th><th>Client</th><th>Web</th><th>Описание</th></tr></thead>
+    <tbody>
+      <tr><td><code>toast</code></td><td class="ok">●</td><td class="lim">◐</td><td class="lim">◐</td><td><code>{ text }</code> — всплывающее сообщение.</td></tr>
+      <tr><td><code>set</code> / <code>get</code> / <code>clear</code></td><td class="ok">●</td><td class="lim">◐</td><td class="no">○</td><td>Бейджи на иконках рабочего стола.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>qr</h2>
+  <table>
+    <thead><tr><th>Метод</th><th>Host</th><th>Client</th><th>Web</th><th>Описание</th></tr></thead>
+    <tbody>
+      <tr><td><code>encode</code></td><td class="ok">●</td><td class="ok">●</td><td class="ok">●</td><td>Сгенерировать QR (data URL / SVG).</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Обновление оболочки (не API мини-приложения)</h2>
+  <p>Оболочка сама проверяет <a href="https://mapphub.github.io/update.json">update.json</a> при холодном старте и из меню «Проверить обновления». Внизу меню оболочки показывается текущая версия APK.</p>
+</body>
+</html>

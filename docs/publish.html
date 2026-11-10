@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Публикация — Mapphub</title>
+  <link rel="stylesheet" href="./docs.css"/>
+</head>
+<body>
+  <nav class="nav">
+    <a href="./">Обзор</a>
+    <a href="./manifest.html">Манифест</a>
+    <a href="./api.html">MiniApps API</a>
+    <a href="./publish.html">Публикация</a>
+  </nav>
+
+  <h1>Публикация мини-приложений</h1>
+  <p>Стартовая точка: репозиторий-шаблон <a href="https://github.com/mapphub/mapp-template">mapphub/mapp-template</a>.</p>
+
+  <h2>Структура шаблона</h2>
+  <pre>mapp-template/
+├── .github/workflows/gateway.yml   # оркестратор PR
+├── package.json                    # version: "1.0.0"
+├── src/                            # исходники разработки (опционально)
+├── .gitignore
+└── mapp/                           # то, что попадает в ZIP
+    ├── mapp.manifest.json          # манифест (нормализуется в mappmanifest.json)
+    ├── icon.png | icon.svg
+    └── public/                     # веб-морда (строго public/)
+        ├── index.html
+        └── script.js</pre>
+
+  <h2>Карта: разработчик → CI</h2>
+  <table>
+    <thead><tr><th>Шаг</th><th>Разработчик</th><th>Gateway</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Fork <code>mapp-template</code>, ветка = имя приложения (например <code>snake</code>)</td><td>ожидание</td></tr>
+      <tr><td>2</td><td>Код, версия в <code>package.json</code>, сборка статики в <code>mapp/public/</code></td><td>ожидание</td></tr>
+      <tr><td>3</td><td>Push ветки в свой форк</td><td>ожидание</td></tr>
+      <tr><td>4</td><td>PR: fork/snake → <code>mapp-template</code> branch <code>snake</code></td><td><code>pull_request_target</code></td></tr>
+      <tr><td>5</td><td>—</td><td>Читает AUTHOR, NAME, VERSION; пишет в манифест; создаёт <code>app-AUTHOR-NAME</code>; gh-pages из <code>mapp/public/</code></td></tr>
+      <tr><td>6</td><td>—</td><td>ZIP из <code>mapp/</code> → Release <code>latest</code> (и <code>vX.0.0</code> при мажоре)</td></tr>
+      <tr><td>7</td><td>—</td><td>Обновляет <code>catalog.json</code> в mapphub.github.io</td></tr>
+      <tr><td>8</td><td>Ссылки в комментарии PR</td><td>PR закрывается без merge</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Запись catalog.json</h2>
+  <pre>{
+  "id": "AUTHOR.NAME",
+  "name": "NAME",
+  "version": "1.0.0",
+  "description": "…",
+  "author": "AUTHOR",
+  "repo": "https://github.com/mapphub/app-AUTHOR-NAME",
+  "packageUrl": "https://github.com/mapphub/app-AUTHOR-NAME/releases/latest/download/app.zip",
+  "releaseUrl": "https://github.com/mapphub/app-AUTHOR-NAME/releases/latest/download/app.zip",
+  "webUrl": "https://mapphub.github.io/…",
+  "permissions": [],
+  "official": false
+}</pre>
+  <p>Обновление точечное по паре <code>name + author</code>, иначе append в массив <code>apps</code>.</p>
+
+  <h2>Требования к gateway.yml</h2>
+  <ul>
+    <li><code>on: pull_request_target</code> (<code>opened</code>, <code>synchronize</code>)</li>
+    <li>Токен: <code>${{ secrets.ORG_ADMIN_TOKEN }}</code></li>
+    <li>Автор: <code>github.actor</code> должен совпадать с полем <code>author</code> после записи</li>
+    <li>Правки JSON через <code>jq</code>, сохраняя кастомные поля разработчика</li>
+  </ul>
+
+  <div class="card">
+    <strong>Статус</strong><br/>
+    Workflow gateway внедряется в <code>mapp-template</code>. Пока секрет <code>ORG_ADMIN_TOKEN</code> не задан в org — шаг 5–7 выполняются вручную или после настройки secrets.
+  </div>
+</body>
+</html>
