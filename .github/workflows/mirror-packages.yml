@@ -3,8 +3,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 */6 * * *'
-  repository_dispatch:
-    types: [mirror-packages]
 permissions:
   contents: write
 jobs:
@@ -24,6 +22,32 @@ jobs:
               ls -lh "packages/${id}.zip"
             else
               echo "WARN missing $id"
+              # minimal fallback for market so first boot works
+              if [ "$id" = "market" ]; then
+                rm -rf /tmp/mapp && mkdir -p /tmp/mapp/public
+                cat > /tmp/mapp/mapp.manifest.json <<'JSON'
+          {"id":"market","name":"Лаунчер","version":"0.4.0","routes":{"root":"public","app":"public","client":"public"},"permissions":["apps","hub","shell"],"launcher":true}
+          JSON
+                cat > /tmp/mapp/public/index.html <<'HTML'
+          <!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Лаунчер</title>
+          <style>body{font-family:system-ui;background:#0d1117;color:#e6edf3;padding:16px}#grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.tile{text-align:center;border:0;background:transparent;color:inherit}.avatar{width:52px;height:52px;border-radius:14px;background:#161b22;display:grid;place-items:center;margin:0 auto 6px}</style></head>
+          <body><h1>Рабочий стол</h1><div id="grid"></div><p id="err"></p>
+          <script>
+          (async function(){
+            const api=()=>window.MiniApp; const grid=document.getElementById('grid'); const err=document.getElementById('err');
+            function boot(){const M=api(); if(!M){err.textContent='MiniApp недоступен';return;}
+              M.apps('list',{}).then(r=>{const apps=(r&&r.apps)||r||[]; grid.innerHTML='';
+                (Array.isArray(apps)?apps:[]).forEach(a=>{const id=a.id||a.appId; const b=document.createElement('button'); b.className='tile'; b.type='button';
+                  b.innerHTML='<div class="avatar">'+(a.name||id||'?').slice(0,1)+'</div><div>'+(a.name||id)+'</div>';
+                  b.onclick=()=>M.hub('open',{appId:id}); grid.appendChild(b);});
+              }).catch(e=>err.textContent=e.message||e);}
+            if(window.MiniApp) boot(); else window.addEventListener('miniapp-ready', boot);
+          })();
+          </script></body></html>
+          HTML
+                (cd /tmp/mapp && zip -r -q "$GITHUB_WORKSPACE/packages/market.zip" .)
+                ls -lh packages/market.zip
+              fi
             fi
           }
           download market app-market
@@ -36,7 +60,7 @@ jobs:
         run: |
           git config user.name mapphub-ci
           git config user.email ci@mapphub.local
-          git add packages/*.zip catalog.json || true
+          git add packages/*.zip || true
           git diff --cached --quiet && echo no-change && exit 0
           git commit -m "chore: mirror mini-app packages"
           git push
