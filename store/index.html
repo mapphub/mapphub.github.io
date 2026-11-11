@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Mapphub · Маркет</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;background:#0d1117;color:#e6edf3;padding:16px}
+    h1{font-size:20px;margin:0 0 8px}p{opacity:.7;font-size:13px;margin:0 0 16px}
+    .card{display:flex;gap:12px;align-items:center;padding:12px;border-radius:14px;background:#161b22;border:1px solid #30363d;margin-bottom:10px;text-decoration:none;color:inherit}
+    .av{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#2f81f7,#8250df);display:grid;place-items:center;font-weight:700;flex-shrink:0}
+    .meta strong{display:block}.meta small{opacity:.65;font-size:12px}
+  </style>
+</head>
+<body>
+  <h1>Маркет</h1>
+  <p>Каталог мини-приложений Mapphub</p>
+  <div id="list">Загрузка…</div>
+  <script>
+    fetch('../catalog.json',{cache:'no-store'}).then(r=>r.json()).then(data=>{
+      var el=document.getElementById('list'); el.innerHTML='';
+      (data.apps||[]).forEach(function(a){
+        if(a.id==='market')return;
+        var href=a.webUrl||(a.repo&&('https://mapphub.github.io/'+a.repo.split('/').pop()+'/'))||('#');
+        var card=document.createElement('a'); card.className='card'; card.href=href;
+        card.innerHTML='<div class="av">'+(a.name||'?').charAt(0)+'</div><div class="meta"><strong></strong><small></small></div>';
+        card.querySelector('strong').textContent=a.name||a.id;
+        card.querySelector('small').textContent=(a.description||a.author||'')+(a.version?' · v'+a.version:'');
+        el.appendChild(card);
+      });
+    }).catch(e=>{document.getElementById('list').textContent=String(e);});
+  </script>
+</body>
+</html>
