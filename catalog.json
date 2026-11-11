@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-11T06:10:00Z",
+  "updatedAt": "2026-11-11T06:45:00Z",
   "platform": {
     "name": "Mapphub",
     "docs": "https://mapphub.github.io/docs/",
@@ -10,14 +10,13 @@
     {
       "id": "market",
       "name": "Рабочий стол",
-      "version": "0.6.0",
+      "version": "0.7.0",
       "description": "Home-screen и каталог",
       "author": "mapphub",
       "repo": "https://github.com/mapphub/app-market",
       "packageUrl": "https://mapphub.github.io/packages/market.zip",
       "releaseUrl": "https://github.com/mapphub/app-market/releases/latest/download/app.zip",
       "webUrl": "https://mapphub.github.io/store/",
-      "permissions": ["apps", "apps.read", "apps.manage", "hub", "shell"],
       "official": true
     },
     {
@@ -30,7 +29,6 @@
       "packageUrl": "https://mapphub.github.io/packages/editor.zip",
       "releaseUrl": "https://github.com/mapphub/app-editor/releases/latest/download/app.zip",
       "webUrl": "https://mapphub.github.io/app-editor/",
-      "permissions": ["apps.read", "apps.write", "apps.manage"],
       "official": true
     },
     {
@@ -43,7 +41,6 @@
       "packageUrl": "https://mapphub.github.io/packages/chat.zip",
       "releaseUrl": "https://github.com/mapphub/app-chat/releases/latest/download/app.zip",
       "webUrl": "https://mapphub.github.io/app-chat/",
-      "permissions": ["net", "share", "db", "notify"],
       "official": true
     },
     {
@@ -56,7 +53,6 @@
       "packageUrl": "https://mapphub.github.io/packages/fileshare.zip",
       "releaseUrl": "https://github.com/mapphub/app-fileshare/releases/latest/download/app.zip",
       "webUrl": "https://mapphub.github.io/app-fileshare/",
-      "permissions": ["net", "share", "db"],
       "official": true
     },
     {
@@ -69,7 +65,6 @@
       "packageUrl": "https://mapphub.github.io/packages/slides.zip",
       "releaseUrl": "https://github.com/mapphub/app-slides/releases/latest/download/app.zip",
       "webUrl": "https://mapphub.github.io/app-slides/",
-      "permissions": ["net", "share"],
       "official": true
     }
   ]
