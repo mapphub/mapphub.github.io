@@ -1,0 +1,65 @@
+name: Mirror apps www
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'
+  repository_dispatch:
+    types: [mirror-apps-www]
+permissions:
+  contents: write
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - repo: app-market
+            id: market
+          - repo: app-editor
+            id: editor
+          - repo: app-chat
+            id: chat
+          - repo: app-fileshare
+            id: fileshare
+          - repo: app-slides
+            id: slides
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch ${{ matrix.repo }} public
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/src /tmp/out
+          mkdir -p /tmp/src
+          # Prefer gh-pages (built), fallback main mapp/public
+          if gh api "repos/mapphub/${{ matrix.repo }}/contents/?ref=gh-pages" >/dev/null 2>&1; then
+            git clone --depth 1 --branch gh-pages "https://x-access-token:${GH_TOKEN}@github.com/mapphub/${{ matrix.repo }}.git" /tmp/src
+            rm -rf /tmp/src/.git
+          else
+            git clone --depth 1 --branch main "https://x-access-token:${GH_TOKEN}@github.com/mapphub/${{ matrix.repo }}.git" /tmp/clone
+            if [ -d /tmp/clone/mapp/public ]; then
+              cp -a /tmp/clone/mapp/public/. /tmp/src/
+            else
+              echo "no public content"; exit 1
+            fi
+          fi
+          mkdir -p "apps/${{ matrix.id }}"
+          rm -rf "apps/${{ matrix.id }}"/*
+          cp -a /tmp/src/. "apps/${{ matrix.id }}/"
+          ls -la "apps/${{ matrix.id }}" | head -20
+
+      - name: Commit
+        run: |
+          set -euo pipefail
+          git config user.name mapphub-bot
+          git config user.email bot@mapphub.local
+          git add "apps/${{ matrix.id }}"
+          if git diff --cached --quiet; then
+            echo "no changes for ${{ matrix.id }}"
+          else
+            git commit -m "mirror www: ${{ matrix.id }} from ${{ matrix.repo }}"
+            git push
+          fi
