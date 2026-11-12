@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Чат</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui;display:flex;flex-direction:column;height:100dvh;background:#0e1621;color:#e4ecf2}
+#top{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#17212b}
+#top h1{flex:1;margin:0;font-size:16px}
+#online{font-size:12px;color:#6ab3f3}
+#log{flex:1;overflow:auto;padding:12px 10px;display:flex;flex-direction:column;gap:6px}
+.row{display:flex;flex-direction:column;max-width:82%}
+.row.me{align-self:flex-end;align-items:flex-end}
+.row .bubble{padding:8px 12px;border-radius:14px;font-size:15px;line-height:1.35;word-break:break-word}
+.row:not(.me) .bubble{background:#182533}
+.row.me .bubble{background:#2b5278}
+.row .meta{font-size:11px;color:#6d7f8f;margin:2px 6px}
+#bar{display:flex;gap:8px;padding:10px;background:#17212b}
+#inp{flex:1;height:42px;border:0;border-radius:21px;padding:0 16px;background:#242f3d;color:#fff}
+#send{width:42px;height:42px;border:0;border-radius:21px;background:#5288c1;color:#fff}
+</style>
+</head><body>
+<div id="top"><h1>Чат</h1><span id="online">—</span></div>
+<div id="log"></div>
+<div id="bar">
+  <input id="inp" placeholder="Сообщение" autocomplete="off"/>
+  <button type="button" id="send">↑</button>
+</div>
+<script src="./script.js"></script>
+</body></html>
