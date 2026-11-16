@@ -1,0 +1,16 @@
+{
+  "platforms": {
+    "android": {
+      "file": "releases/android.json",
+      "description": "Shell APK updates — used by mobile-shell update check",
+      "url": "https://mapphub.github.io/releases/android.json"
+    },
+    "apps": {
+      "dir": "releases/apps/",
+      "description": "Per mini-app release history (id with dots → filename with hyphens)",
+      "url": "https://mapphub.github.io/releases/apps/"
+    }
+  },
+  "catalog": "https://mapphub.github.io/catalog.json",
+  "updatedAt": "2026-11-16T07:00:00Z"
+}
