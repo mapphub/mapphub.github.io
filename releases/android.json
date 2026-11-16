@@ -1,0 +1,12 @@
+{
+  "platform": "android",
+  "versionCode": 78,
+  "versionName": "0.1.78",
+  "channel": "beta",
+  "apkUrl": "https://mapphub.github.io/downloads/mini-apps-shell.apk",
+  "releaseNotesUrl": "https://github.com/mapphub/mobile-shell/releases/latest",
+  "changelog": [
+    "Beta build 78"
+  ],
+  "updatedAt": "2026-11-16T07:00:00Z"
+}
