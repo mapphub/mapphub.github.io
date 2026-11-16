@@ -2,13 +2,13 @@
   "platforms": {
     "android": {
       "file": "releases/android.json",
-      "description": "Full shell APK release history with download links. Used by mobile-shell self-update.",
-      "url": "https://mapphub.github.io/releases/android.json"
+      "url": "https://mapphub.github.io/releases/android.json",
+      "description": "Shell APK history for self-update"
     }
   },
   "miniApps": {
     "catalog": "https://mapphub.github.io/catalog.json",
     "note": "Mini-app packages and release tags live in each app repo. Update checks use manifestUrl from catalog (raw mapp.manifest.json in the app repository)."
   },
-  "updatedAt": "2026-11-16T08:30:00Z"
+  "updatedAt": "2026-11-16T21:49:37Z"
 }

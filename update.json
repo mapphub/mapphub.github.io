@@ -1,10 +1,9 @@
 {
-  "versionCode": 78,
-  "versionName": "0.1.78",
-  "channel": "beta",
+  "versionCode": 83,
+  "versionName": "0.1.83",
+  "channel": "stable",
   "apkUrl": "https://mapphub.github.io/downloads/mini-apps-shell.apk",
-  "releaseNotesUrl": "https://github.com/mapphub/mobile-shell/releases/tag/beta-78",
-  "changelog": [
-    "Beta build 78"
-  ]
+  "releaseNotesUrl": "https://github.com/mapphub/mobile-shell/releases/tag/v0.1.83",
+  "historyUrl": "https://mapphub.github.io/releases/android.json",
+  "changelog": []
 }

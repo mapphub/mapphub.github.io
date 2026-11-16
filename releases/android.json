@@ -1,15 +1,24 @@
 {
   "platform": "android",
-  "versionCode": 78,
-  "versionName": "0.1.78",
+  "versionCode": 83,
+  "versionName": "0.1.83",
   "apkUrl": "https://mapphub.github.io/downloads/mini-apps-shell.apk",
   "latest": {
-    "versionCode": 78,
-    "versionName": "0.1.78",
-    "tag": "v0.1.78",
+    "versionCode": 83,
+    "versionName": "0.1.83",
+    "tag": "v0.1.83",
     "apkUrl": "https://mapphub.github.io/downloads/mini-apps-shell.apk"
   },
   "releases": [
+    {
+      "versionCode": 83,
+      "versionName": "0.1.83",
+      "tag": "v0.1.83",
+      "apkUrl": "https://mapphub.github.io/downloads/android/v0.1.83/mini-apps-shell.apk",
+      "apkLatestUrl": "https://mapphub.github.io/downloads/mini-apps-shell.apk",
+      "githubApkUrl": "https://github.com/mapphub/mobile-shell/releases/download/v0.1.83/mini-apps-shell.apk",
+      "publishedAt": "2026-11-16T21:49:37Z"
+    },
     {
       "versionCode": 78,
       "versionName": "0.1.78",
@@ -20,5 +29,5 @@
       "publishedAt": "2026-11-12T00:00:00Z"
     }
   ],
-  "updatedAt": "2026-11-16T08:30:00Z"
+  "updatedAt": "2026-11-16T21:49:37Z"
 }
